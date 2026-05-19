@@ -1,15 +1,30 @@
 import unicodedata
 from cesar import chiffrer, dechiffrer
+from enigma import enigma_chiffrer, enigma_dechiffrer
 
 
-def demander_cle():
-    """Demande une clé entière à l'utilisateur, redemande tant qu'invalide."""
+def demander_cle_cesar():
+    """Demande une clé entière pour César, redemande tant qu'invalide."""
     while True:
         cle_txt = input("Entrez la clé (un entier, ex: 42 ou -42) : ").strip()
         try:
             return int(cle_txt)
         except ValueError:
             print(f"'{cle_txt}' n'est pas un entier valide. Réessayez.")
+
+
+def demander_cles_enigma():
+    """Demande 3 clés entières pour Enigma (format 'a-b-c'), redemande tant qu'invalide."""
+    while True:
+        cles_txt = input("Entrez les 3 clés Enigma au format 'a-b-c' (ex: 7-16-9) : ").strip()
+        parts = cles_txt.split("-")
+        if len(parts) != 3:
+            print("Il faut exactement 3 nombres séparés par '-'. Réessayez.")
+            continue
+        try:
+            return tuple(int(x) for x in parts)
+        except ValueError:
+            print(f"'{cles_txt}' contient une valeur non entière. Réessayez.")
 
 
 def normaliser(texte: str) -> str:
@@ -21,7 +36,7 @@ def normaliser(texte: str) -> str:
 
 
 def orchestrer():
-    """Pose les questions à l'utilisateur et lance le chiffrement César."""
+    """Pose les questions à l'utilisateur et lance le chiffrement (César ou Enigma)."""
 
     # === ÉTAPE 1 : chiffrer ou déchiffrer ? ===
     action = ""
@@ -49,12 +64,26 @@ def orchestrer():
             print(f"Erreur : fichier '{chemin}' introuvable.")
             return
 
+    # === ÉTAPE 2,5 : demander si cesar ou enigma ===
+    mode = ""
+    while mode not in ("cesar", "enigma"):
+        mode = normaliser(input("Quel mode voulez-vous (cesar / enigma) ? "))
+        if mode not in ("cesar", "enigma"):
+            print("Réponse invalide, tapez 'cesar' ou 'enigma'.")
+
     # === ÉTAPE 3 : récupérer la clé et lancer l'algo ===
-    cle = demander_cle()
-    if action == "chiffrer":
-        resultat = chiffrer(texte, cle)
-    else:
-        resultat = dechiffrer(texte, cle)
+    if mode == "cesar":
+        cle = demander_cle_cesar()
+        if action == "chiffrer":
+            resultat = chiffrer(texte, cle)
+        else:
+            resultat = dechiffrer(texte, cle)
+    else:  # mode == "enigma"
+        cles = demander_cles_enigma()
+        if action == "chiffrer":
+            resultat = enigma_chiffrer(texte, cles)
+        else:
+            resultat = enigma_dechiffrer(texte, cles)
 
     # === ÉTAPE 4 : afficher le résultat ===
     print("\n--- Résultat ---")

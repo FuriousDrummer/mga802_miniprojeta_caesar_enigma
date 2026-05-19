@@ -22,7 +22,6 @@ if __name__ == "__main__":
 
 
 
-
 """
 MGA802 — Mini-Projet A : Chiffrement de César
 Squelette de départ pour votre équipe.
