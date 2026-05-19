@@ -9,10 +9,9 @@ def enigma_chiffrer(msg,cles):
     return msg_chiffrer
 
 def enigma_dechiffrer(msg,cles):
-
     msg_dechiffrer=''
-    for i in range(len(msg)):
-        index = i % len(cles)
-        msg_dechiffrer -= dechiffrer(msg[i], cles[index])
+    for i, letter in enumerate(msg):
+        index=i % 3
+        msg_dechiffrer += dechiffrer(letter, cles[index])
     return msg_dechiffrer
 
