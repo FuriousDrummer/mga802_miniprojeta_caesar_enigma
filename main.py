@@ -14,10 +14,13 @@ si c'est décoder :
     demander si il a le code ou si il faut décoder de manière brulate
 
     """
+import unicodedata
 
- import unicodedata
+from cesar import chiffrer, dechiffrer
+from enigma import enigma_chiffrer, enigma_dechiffrer
 
-# Remarque : chiffrer(), dechiffrer() et brute_force_cesar() sont définies
+
+# Remarque : chiffrer(), dechiffrer() et brute_force_cesar() sont définies dans d'autres fichiers propres 
 # plus haut dans ce module (ou importées) par le reste de l'équipe.
 # L'orchestrateur ci-dessous se contente de les appeler avec les bons arguments.
 
@@ -37,7 +40,7 @@ def demander_cle():
 
 
 
-  def normaliser(texte: str) -> str:
+def normaliser(texte: str) -> str:
       """Met en minuscules, enlève les accents et les espaces autour."""
       # 1. Mettre en minuscules + enlever espaces début/fin
       texte = texte.strip().lower()
