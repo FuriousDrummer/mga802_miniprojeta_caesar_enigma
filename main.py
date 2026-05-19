@@ -1,10 +1,6 @@
-"""
-MGA802 — Mini-Projet A : Chiffrement de César
-Squelette de départ pour votre équipe.
-"""
-import argparse
 
 
+"""
 def chiffrer(message: str, cle: int):
 	# TODO: retourner la chaîne chiffrée (type str).
 	# Exigences visibles dans tests/test_caesar.py :
@@ -163,3 +159,4 @@ if __name__ == "__main__":
 	# (car __name__ ne vaut pas "__main__" lors d'un import).
 	main()
 
+"""
