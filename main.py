@@ -4,7 +4,22 @@ MGA802 — Mini-Projet A : Chiffrement de César
 Squelette de départ pour votre équipe.
 """
 import argparse
+import unicodedata  # Pour gérer et supprimer les accents des caractères
 
+def formater_le_message(message_brut = "Vini, Vidi, Vici !"):
+    """
+    Formate le mot : le met en minuscule et retire tous les accents.
+    """
+	# Le mot est passé tout en majuscules
+    message_traite = message_brut.lower()
+
+    # unicodedata.normalize('NFD', mot) sépare les caractères de base et leurs accents
+    # .encode('ascii', 'ignore') convertit en ASCII et supprime les accents ainsi isolés
+    # .decode('utf-8') reconvertit le tout en chaîne de caractères classique
+    message_traite = unicodedata.normalize('NFD', message_traite) \
+        .encode('ascii', 'ignore') \
+        .decode('utf-8')
+    return message_traite
 
 
 """ Travail de chef d'orchestre
