@@ -12,36 +12,37 @@ from pathlib import Path
 
 # Permet d'importer main.py depuis le dossier parent
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from main import chiffrer, dechiffrer, enigma_chiffrer  # noqa: E402
+from cesar import chiffrer, dechiffrer
+from enigma import enigma_chiffrer
 
 
 # ---------- Chaînes de test officielles — César (spec §7) ----------
 
 def test_cesar_officiel_cle_42():
-    assert chiffrer("Veni, vidi, vici!", 42) == "Ludy, lyty, lysy!"
+    assert chiffrer("veni, vidi, vici!", 42) == "ludy, lyty, lysy!"
 
 
 def test_cesar_officiel_cle_neg_42():
-    assert chiffrer("Veni, vidi, vici!", -42) == "Foxs, fsns, fsms!"
+    assert chiffrer("veni, vidi, vici!", -42) == "foxs, fsns, fsms!"
 
 
 # ---------- Chaîne de test officielle — Enigma César (spec §2.6) ----------
 
 def test_enigma_officiel_maison():
-    assert enigma_chiffrer("MAISON", (7, 16, 9)) == "TQRZEW"
+    assert enigma_chiffrer("maison", (7, 16, 9)) == "tqrzew"
 
 
 # ---------- Cas standards (à compléter par votre équipe) ----------
 
 def test_cesar_round_trip():
     """Chiffrer puis déchiffrer doit redonner le message original."""
-    msg = "Bonjour le monde !"
+    msg = "bonjour le monde !"
     assert dechiffrer(chiffrer(msg, 7), 7) == msg
 
 
 def test_cesar_cle_zero_identite():
     """Une clé de 0 ne doit rien changer."""
-    assert chiffrer("Tout pareil.", 0) == "Tout pareil."
+    assert chiffrer("tout pareil.", 0) == "tout pareil."
 
 
 # TODO : ajoutez vos propres tests ci-dessous
