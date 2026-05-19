@@ -1,27 +1,3 @@
-
-"""
-MGA802 — Mini-Projet A : Chiffrement de César
-Squelette de départ pour votre équipe.
-"""
-import argparse
-import unicodedata  # Pour gérer et supprimer les accents des caractères
-
-def formater_le_message(message_brut = "Vini, Vidi, Vici !"):
-    """
-    Formate le mot : le met en minuscule et retire tous les accents.
-    """
-	# Le mot est passé tout en majuscules
-    message_traite = message_brut.lower()
-
-    # unicodedata.normalize('NFD', mot) sépare les caractères de base et leurs accents
-    # .encode('ascii', 'ignore') convertit en ASCII et supprime les accents ainsi isolés
-    # .decode('utf-8') reconvertit le tout en chaîne de caractères classique
-    message_traite = unicodedata.normalize('NFD', message_traite) \
-        .encode('ascii', 'ignore') \
-        .decode('utf-8')
-    return message_traite
-
-
 """ Travail de chef d'orchestre
 
 demander si l'utilisateur veut encoder ou décoder
@@ -141,6 +117,28 @@ if __name__ == "__main__":
 
 
 """
+MGA802 — Mini-Projet A : Chiffrement de César
+Squelette de départ pour votre équipe.
+"""
+"""import argparse
+import unicodedata  # Pour gérer et supprimer les accents des caractères
+
+def formater_le_message(message_brut = "Vini, Vidi, Vici !"):
+    '''
+    Formate le mot : le met en minuscule et retire tous les accents.
+    '''
+	# Le mot est passé tout en majuscules
+    message_traite = message_brut.lower()
+
+    # unicodedata.normalize('NFD', mot) sépare les caractères de base et leurs accents
+    # .encode('ascii', 'ignore') convertit en ASCII et supprime les accents ainsi isolés
+    # .decode('utf-8') reconvertit le tout en chaîne de caractères classique
+    message_traite = unicodedata.normalize('NFD', message_traite) \
+        .encode('ascii', 'ignore') \
+        .decode('utf-8')
+    return message_traite
+"""
+"""
 def chiffrer(message: str, cle: int):
 	# TODO: retourner la chaîne chiffrée (type str).
 	# Exigences visibles dans tests/test_caesar.py :
@@ -172,7 +170,7 @@ def enigma_chiffrer(message: str, cles):
 
 
 def _parse_cle(texte: str):
-	"""Convertit l'argument --cle en clé utilisable.
+	'''Convertit l'argument --cle en clé utilisable.
 
 	Cette fonction analyse la clé fournie par l'utilisateur en ligne de commande
 	et la transforme en type Python approprié :
@@ -189,7 +187,7 @@ def _parse_cle(texte: str):
 	Exemple :
 		_parse_cle("42") → 42 (int)
 		_parse_cle("7-16-9") → (7, 16, 9) (tuple)
-	"""
+	'''
 	# Vérifier s'il y a un tiret dans la clé (sauf si c'est juste un signe négatif).
 	# lstrip("-") enlève tous les tirets au début, pour distinguer :
 	#   "-42" (entier négatif, pas de tiret après le signe)
@@ -201,7 +199,7 @@ def _parse_cle(texte: str):
 	return int(texte)
 
 def main(argv=None):
-	"""Point d'entrée principal du programme en ligne de commande.
+	'''Point d'entrée principal du programme en ligne de commande.
 
 	Cette fonction :
 	1. Parse les arguments saisis par l'utilisateur (action, message, clé)
@@ -217,7 +215,7 @@ def main(argv=None):
 		python main.py chiffrer "Veni, vidi, vici!" --cle 42
 		python main.py dechiffrer "Ludy, lyty, lysy!" --cle 42
 		python main.py enigma "MAISON" --cle 7-16-9
-	"""
+	'''
 	# === ÉTAPE 1 : Créer et configurer le parseur d'arguments ===
 	# argparse est un module qui aide à gérer les arguments en ligne de commande.
 	# ArgumentParser crée un analyseur personnalisé pour notre programme.
