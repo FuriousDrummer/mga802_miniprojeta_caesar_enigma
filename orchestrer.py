@@ -71,20 +71,42 @@ def orchestrer():
         if mode not in ("cesar", "enigma"):
             print("Réponse invalide, tapez 'cesar' ou 'enigma'.")
 
-    # === ÉTAPE 3 : récupérer la clé et lancer l'algo ===
-    if mode == "cesar":
-        cle = demander_cle_cesar()
-        if action == "chiffrer":
-            resultat = chiffrer(texte, cle)
+    # === ÉTAPE 3 : chiffrement (clé toujours demandée) ===
+    if action == "chiffrer":
+        if mode == "cesar":
+            resultat = chiffrer(texte, demander_cle_cesar())
         else:
-            resultat = dechiffrer(texte, cle)
-    else:  # mode == "enigma"
-        cles = demander_cles_enigma()
-        if action == "chiffrer":
-            resultat = enigma_chiffrer(texte, cles)
-        else:
-            resultat = enigma_dechiffrer(texte, cles)
+            resultat = enigma_chiffrer(texte, demander_cles_enigma())
+        print("\n--- Résultat ---")
+        print(resultat)
+        return
 
-    # === ÉTAPE 4 : afficher le résultat ===
-    print("\n--- Résultat ---")
-    print(resultat)
+    # === ÉTAPE 4 : déchiffrement -> connaît-on la clé ? ===
+    connait_cle = ""
+    while connait_cle not in ("oui", "non"):
+        connait_cle = normaliser(input("Connaissez-vous la clé ? (oui / non) "))
+        if connait_cle not in ("oui", "non"):
+            print("Réponse invalide, tapez 'oui' ou 'non'.")
+
+    # ÉTAPE 4a : clé connue -> déchiffrement classique
+    if connait_cle == "oui":
+        if mode == "cesar":
+            resultat = dechiffrer(texte, demander_cle_cesar())
+        else:
+            resultat = enigma_dechiffrer(texte, demander_cles_enigma())
+        print("\n--- Résultat ---")
+        print(resultat)
+        return
+
+    # ÉTAPE 4b : clé inconnue -> brute-force
+    if mode == "cesar":
+        # import local pour éviter un import circulaire (brute_cesar importe orchestrer)
+        from brute_cesar import brute_force_cesar
+        cle, resultat, mots_non_identifies = brute_force_cesar(texte)
+        print("\n--- Résultat ---")
+        print(f"Clé trouvée   : {cle}")
+        print(f"Déchiffrement : {resultat}")
+        if mots_non_identifies:
+            print(f"{len(mots_non_identifies)} mot(s) non identifié(s) : {mots_non_identifies}")
+    else:
+        print("Le brute-force Enigma n'est pas encore disponible.")

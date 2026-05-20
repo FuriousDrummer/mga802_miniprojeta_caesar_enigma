@@ -5,7 +5,9 @@ une fonction  brute pour cera :
     créer un dico enorme de mots les plus probables en francias, normalisé. 
     
 
-
+Histogramme pour trouver le candidat (rapide, sur les 26 clés) → dictionnaire pour confirmer uniquement le gagnant (1 seul déchiffrement, pas 26).
 
 
 une fonction brute pour enigma 
+
+
