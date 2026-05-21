@@ -137,7 +137,7 @@ def brute_force_dictionnaire(message):
     print()
     print()
     print()
-    print("dico à bien marché")
+    print("dico a bien marché")
     return meilleure_cle, dechiffre, mots_non_identifies
 
 
@@ -158,12 +158,12 @@ def brute_force_cesar(message_chiffre):
     
     return brute_force_dictionnaire(message)
 
-"""DEMO EN ANÇANT LE FICHIER :)"""
+"""DEMO EN LANÇANT LE FICHIER :)"""
 if __name__ == "__main__":
     # Démonstration : on chiffre une phrase, puis on retrouve la clé sans la donner.
     from cesar import chiffrer
 
-    exemple = "le chat dort sur le canape "
+    exemple = "bonjour, qu'est ce que, tu brute force attends un mot identifie quoi aesrdtfyguhj "
     chiffre = chiffrer(exemple, 5)
     cle_trouvee, dechiffre, mots_non_identifies = brute_force_cesar(chiffre)
 
