@@ -173,7 +173,7 @@ if __name__ == "__main__":
     if mots_non_identifies:
         print(f"{len(mots_non_identifies)} mot(s) non identifié(s) : {mots_non_identifies}")
 
-    from timeit import timeit
-    temps_brute_cesar=timeit('brute_force_cesar (chiffre)', globals=globals(), number=100)
-    print(f"{temps_brute_cesar/100:.3f} secondes")
+    # from timeit import timeit
+    # temps_brute_cesar=timeit('brute_force_cesar (chiffre)', globals=globals(), number=100)
+    # print(f"{temps_brute_cesar/100:.3f} secondes")
     #0,0,16 secondes pour le brute_force du chiffrement cesar

@@ -72,7 +72,7 @@ print(msg_chiffrer_test)
 # print(f'La cle est {a}, et le message est : {b}')
 # print(f"mots pas identifie : {c} ")
 
-from timeit import timeit
-temps_brute_enigma=timeit('brute_force_enigma (msg_chiffrer_test)', globals=globals(), number=100)
-print(f"{temps_brute_enigma/100:.3f} secondes")
+# from timeit import timeit
+# temps_brute_enigma=timeit('brute_force_enigma (msg_chiffrer_test)', globals=globals(), number=100)
+# print(f"{temps_brute_enigma/100:.3f} secondes")
 ## Le dechiffrement du brute force enigma de 0,985 secondes 
