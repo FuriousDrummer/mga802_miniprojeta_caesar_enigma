@@ -1,8 +1,47 @@
 from orchestrer import orchestrer
+import argparse # pour utiliser argparse
+from cesar import chiffrer, dechiffrer
+from enigma import enigma_chiffrer, enigma_dechiffrer
+from brute_cesar import brute_force_cesar
+import sys #pour comparer l'appel dans la console
+
+def _parse_cle(texte : str):
+	#converti la cle fournie en texte
+	if "-" in texte.lstrip("-"):
+		return tuple(int(x) for x in texte.split("-"))
+	return int(texte)
+
+def main():
+# si il n'y a pas d'arguments, le mode interactif est lance
+	if len(sys.argv) == 1:
+		orchestrer()
+		return
+
+# sinon configuration de argparse
+parser = argparse.ArgumentParser(description="Outil de chiffrement César et Enigma.")
+
+# arguments principaux
+parser.add_argument("mode", choices=["cesar", "enigma"], help="Mode de chiffrement : cesar ou enigma")
+parser.add_argument("action", choices=["chiffrer", "dechiffrer", "bruteforce"], help="Action a effectuer : chiffrer, dechiffrer, bruteforce")
+parser.add_argument("message", help="Ecrire le texte a traiter ou le nom du fichier + -f")
+
+# arguments optionnels
+parser.add_argument("-c", choices=["chiffrer", "dechiffrer", "bruteforce"], help="Action a effectuer : chiffrer, dechiffrer, bruteforce")
+parser.add_argument("-f", "--fichier", action="store_true", help="Indique que l'argument 'texte' est un chemin de fichier.")
+
+args = parser.parse_args()
+
+# check le fichier
+message = args.
+if 
 
 
 if __name__ == "__main__":
-	orchestrer()
+
+
+
+
+
 
 
 
