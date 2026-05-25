@@ -21,7 +21,7 @@ def main():
 	parser.add_argument("message", help="Ecrire le texte a traiter ou le nom du fichier + -f")
 
 	# arguments optionnels
-	parser.add_argument("-c", "--cle", help="La clé (ex: 42 pour cesar, 7-16-9 pour enigma). Requise sauf pour bruteforce.")
+	parser.add_argument("-c", "--cle", help="La clé (ex: '-c 42' pour cesar, '-c 7-16-9' pour enigma). Requise sauf pour bruteforce.")
 	parser.add_argument("-f", "--fichier", action="store_true", help="Indique que l'argument 'texte' est un chemin de fichier.")
 
 	try:
@@ -30,7 +30,7 @@ def main():
 		# argparse a détecté une erreur et essaie de quitter le script.
 		print("La commande tapée est invalide ou incomplète.")
 		print("Tapez 'python main.py -h' pour afficher le manuel d'aide complet.")
-		sys.exit(1)  # On quitte le script proprement
+		return  # On quitte le script proprement
 
 	# check le fichier
 	message = args.message
