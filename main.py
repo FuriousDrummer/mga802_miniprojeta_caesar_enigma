@@ -1,4 +1,4 @@
-from orchestrer import orchestrer
+from orchestrer import orchestrer, normaliser
 import argparse # pour utiliser argparse
 from cesar import chiffrer, dechiffrer
 from enigma import enigma_chiffrer, enigma_dechiffrer
@@ -41,6 +41,7 @@ def main():
 		except FileNotFoundError:
 			print(f"Erreur : fichier '{args.message}' introuvable.")
 			sys.exit(1)
+	message = normaliser(message)
 
 
 	if args.action == "bruteforce":
