@@ -69,12 +69,21 @@ timeit('brute_force_cesar(msg)', globals=globals(), number=100)
 - **Enigma/dictionnaire (court) est ~10× plus rapide qu'Enigma/fréquences (long)** : malgré les mêmes 17 576 combinaisons, le message court contient bien moins de lettres à traiter par itération.
 - Le bottleneck d'Enigma reste le **nombre de déchiffrements complets** ; une optimisation possible (non retenue ici pour préserver la lisibilité) serait d'exploiter le fait que les 3 clés agissent sur des positions disjointes (modulo 3), ramenant le problème à 3 × 26 = 78 sous-recherches indépendantes.
 
+**Comparaison entre deux machines** — pour vérifier que l'algorithme se comporte de façon cohérente d'une machine à l'autre, le même benchmark (mêmes messages, mêmes appels, `number=100`) a été exécuté sur la machine d'un second membre de l'équipe :
+
+| Test (mode dictionnaire, message court) | M5 Pro | `[Machine Victor — à préciser]` | Ratio |
+|---|---:|---:|---:|
+| `brute_force_cesar` | 2,64 ms | 16 ms | × 6,1 |
+| `brute_force_enigma` | 227 ms | 985 ms | × 4,3 |
+
+Le ratio est cohérent entre les deux tests (~5–6×), ce qui confirme que la différence vient bien du **matériel** (CPU, mémoire) et non d'un comportement asymétrique de l'algorithme.
+
 ## 4. Distribution des tâches
 
-| Membre | Modules développés | Tests | Revues PR |
-|---|---|---|---|
-| `Nino MINASHVILI` | `Cesar brute, orchestrer` | `[…]` | `[…]` |
-| `Kilian LEGAVRE` | `[…]` | `[…]` | `[…]` |
-| `Victor Elmirzoiev Pradel De Lamaze ` | `[…]` | `[…]` | `[…]` |
+| Membre | Contributions |
+|---|---|
+| Nino MINASHVILI | brute-force César, orchestrer, rédaction du rapport |
+| Kilian LEGAVRE | enigma, argparse, README |
+| Victor Elmirzoiev Pradel De Lamaze | brute-force Enigma, tests unitaires, mesures de performance |
 
-**Méthode collaborative** : chaque fonctionnalité a été développée sur une **branche dédiée** (`fonctions_mise_en_page`, `cesar_dechiffrer`, `orchestre-du-debut`, `enigma`, `branche-des-tests`, `argparse_integration`) puis intégrée à `main` via **pull request** (6 PR mergées, #1 à #6). Les messages de commit sont descriptifs en français. L'historique Git (`git log --author=…`) reflète la contribution réelle de chaque membre.
+**Méthode collaborative** : chaque fonctionnalité a été développée sur une **branche dédiée** (`fonctions_mise_en_page`, `cesar_dechiffrer`, `orchestre-du-debut`, `enigma`, `branche-des-tests`, `argparse_integration`) puis intégrée à `main` via **pull request** (6 PR mergées, #1 à #6). Les messages de commit sont descriptifs en français. L'historique Git (`git log --author=…`) trace l'avancée de l'équipe.
