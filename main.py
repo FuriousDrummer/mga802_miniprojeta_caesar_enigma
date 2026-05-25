@@ -3,6 +3,7 @@ import argparse # pour utiliser argparse
 from cesar import chiffrer, dechiffrer
 from enigma import enigma_chiffrer, enigma_dechiffrer
 from brute_cesar import brute_force_cesar
+from brute_enigma import brute_force_enigma
 import sys #pour comparer l'appel dans la console
 
 def _parse_cle(texte : str):
@@ -12,32 +13,57 @@ def _parse_cle(texte : str):
 	return int(texte)
 
 def main():
-# si il n'y a pas d'arguments, le mode interactif est lance
+	# si il n'y a pas d'arguments, le mode interactif est lance
 	if len(sys.argv) == 1:
 		orchestrer()
 		return
 
-# sinon configuration de argparse
-parser = argparse.ArgumentParser(description="Outil de chiffrement César et Enigma.")
+	# sinon configuration de argparse
+	parser = argparse.ArgumentParser(description="Outil de chiffrement César et Enigma.")
 
-# arguments principaux
-parser.add_argument("mode", choices=["cesar", "enigma"], help="Mode de chiffrement : cesar ou enigma")
-parser.add_argument("action", choices=["chiffrer", "dechiffrer", "bruteforce"], help="Action a effectuer : chiffrer, dechiffrer, bruteforce")
-parser.add_argument("message", help="Ecrire le texte a traiter ou le nom du fichier + -f")
+	# arguments principaux
+	parser.add_argument("mode", choices=["cesar", "enigma"], help="Mode de chiffrement : cesar ou enigma")
+	parser.add_argument("action", choices=["chiffrer", "dechiffrer", "bruteforce"], help="Action a effectuer : chiffrer, dechiffrer, bruteforce")
+	parser.add_argument("message", help="Ecrire le texte a traiter ou le nom du fichier + -f")
 
-# arguments optionnels
-parser.add_argument("-c", choices=["chiffrer", "dechiffrer", "bruteforce"], help="Action a effectuer : chiffrer, dechiffrer, bruteforce")
-parser.add_argument("-f", "--fichier", action="store_true", help="Indique que l'argument 'texte' est un chemin de fichier.")
+	# arguments optionnels
+	parser.add_argument("-c", choices=["chiffrer", "dechiffrer", "bruteforce"], help="Action a effectuer : chiffrer, dechiffrer, bruteforce")
+	parser.add_argument("-f", "--fichier", action="store_true", help="Indique que l'argument 'texte' est un chemin de fichier.")
 
-args = parser.parse_args()
+	try:
+		args = parser.parse_args()
+	except SystemExit:
+		# argparse a détecté une erreur et essaie de quitter le script.
+		print("La commande tapée est invalide ou incomplète.")
+		print("Tapez 'python main.py -h' pour afficher le manuel d'aide complet.")
+		sys.exit(1)  # On quitte le script proprement
 
-# check le fichier
-message = args.
-if 
+	# check le fichier
+	message = args.texte
+	if args.fichier:
+		try:
+			with open(args.texte, "r", encoding="utf-8") as fio:
+				message = fio.read()
+		except FileNotFoundError:
+			print(f"Erreur : fichier '{args.texte}' introuvable.")
+			sys.exit(1)
+
+
+	if args.action == "bruteforce":
+			if args.mode == "cesar":
+				cle, resultat, mots_non_identifies = brute_force_cesar(message)
+			elif args.mode == "enigma":
+				cle, resultat, mots_non_identifies = brute_force_enigma(message)
+			print("\n--- Résultat Brute-Force ---")
+			print(f"Clé trouvée   : {cle}")
+			print(f"Déchiffrement : {resultat}")
+			if any(mots_non_identifies):
+				print(f"Mots non-identifiés : {mots_non_identifies}")
+
 
 
 if __name__ == "__main__":
-
+	main()
 
 
 

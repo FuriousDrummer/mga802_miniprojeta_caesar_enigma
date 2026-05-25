@@ -66,8 +66,8 @@ def brute_force_enigma(message_chiffre):
 
 
 ### TEST###
-message_test="n'hesitez pas a tester ce dechiffrement, on va avoir tout les points"
+'''message_test="n'hesitez pas a tester ce dechiffrement, on va avoir tout les points"
 msg_chiffrer_test=enigma_chiffrer(message_test, (9,9,17))
 print(msg_chiffrer_test)
 a,b=brute_force_enigma(msg_chiffrer_test)
-print(f'La cle est {a}, et le message est : {b}')
+print(f'La cle est {a}, et le message est : {b}')'''
