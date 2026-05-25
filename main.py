@@ -27,7 +27,7 @@ def main():
 	parser.add_argument("message", help="Ecrire le texte a traiter ou le nom du fichier + -f")
 
 	# arguments optionnels
-	parser.add_argument("-c", choices=["chiffrer", "dechiffrer", "bruteforce"], help="Action a effectuer : chiffrer, dechiffrer, bruteforce")
+	parser.add_argument("-c", "--cle", help="La clé (ex: 42 pour cesar, 7-16-9 pour enigma). Requise sauf pour bruteforce.")
 	parser.add_argument("-f", "--fichier", action="store_true", help="Indique que l'argument 'texte' est un chemin de fichier.")
 
 	try:
@@ -39,26 +39,70 @@ def main():
 		sys.exit(1)  # On quitte le script proprement
 
 	# check le fichier
-	message = args.texte
+	message = args.message
 	if args.fichier:
 		try:
-			with open(args.texte, "r", encoding="utf-8") as fio:
+			with open(args.message, "r", encoding="utf-8") as fio:
 				message = fio.read()
 		except FileNotFoundError:
-			print(f"Erreur : fichier '{args.texte}' introuvable.")
+			print(f"Erreur : fichier '{args.message}' introuvable.")
 			sys.exit(1)
 
 
 	if args.action == "bruteforce":
-			if args.mode == "cesar":
-				cle, resultat, mots_non_identifies = brute_force_cesar(message)
-			elif args.mode == "enigma":
-				cle, resultat, mots_non_identifies = brute_force_enigma(message)
-			print("\n--- Résultat Brute-Force ---")
-			print(f"Clé trouvée   : {cle}")
-			print(f"Déchiffrement : {resultat}")
-			if any(mots_non_identifies):
-				print(f"Mots non-identifiés : {mots_non_identifies}")
+		if args.mode == "cesar":
+			cle, resultat, mots_non_identifies = brute_force_cesar(message)
+		else:
+			cle, message, mots_non_identifies = brute_force_enigma(message)
+		print("\n--- Résultat Brute-Force ---")
+		print(f"Clé trouvée   : {cle}")
+		print(f"Déchiffrement : {message}")
+		if any(mots_non_identifies):
+			print(f"Mots non-identifiés : {mots_non_identifies}")
+	elif args.action == "chiffrer":
+		if args.mode == "cesar":
+			cle = args.cle
+			try:
+				cle = int(cle)
+			except ValueError:
+				print(f"La clé contient une valeur non entière. Réessayez.")
+				return
+			message = chiffrer(message, cle)
+		else:
+			cle = args.cle
+			cle = cle.split("-")
+			if len(cle) != 3:
+				print("Il faut exactement 3 clés séparées par '-'. Réessayez.")
+				return
+			try:
+				cle = tuple(int(x) for x in cle)
+			except ValueError:
+				print(f"Les clés contiennent une valeur non entière. Réessayez.")
+				return
+			message = enigma_chiffrer(message, cle)
+		print(f"Le message chiffré est : {message}")
+	elif args.action == "dechiffrer":
+		if args.mode == "cesar":
+			cle = args.cle
+			try:
+				cle = int(cle)
+			except ValueError:
+				print(f"La clé contient une valeur non entière. Réessayez.")
+				return
+			message = dechiffrer(message, cle)
+		else:
+			cle = args.cle
+			cle = cle.split("-")
+			if len(cle) != 3:
+				print("Il faut exactement 3 clés séparées par '-'. Réessayez.")
+				return
+			try:
+				cle = tuple(int(x) for x in cle)
+			except ValueError:
+				print(f"Les clés contiennent une valeur non entière. Réessayez.")
+				return
+			message = enigma_dechiffrer(message, cle)
+		print(f"Le message chiffré est : {message}")
 
 
 
