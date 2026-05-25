@@ -6,12 +6,6 @@ from brute_cesar import brute_force_cesar
 from brute_enigma import brute_force_enigma
 import sys #pour comparer l'appel dans la console
 
-def _parse_cle(texte : str):
-	#converti la cle fournie en texte
-	if "-" in texte.lstrip("-"):
-		return tuple(int(x) for x in texte.split("-"))
-	return int(texte)
-
 def main():
 	# si il n'y a pas d'arguments, le mode interactif est lance
 	if len(sys.argv) == 1:
