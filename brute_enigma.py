@@ -65,12 +65,34 @@ def brute_force_enigma(message_chiffre):
 
 
 ### TEST###
-'''message_test="n'hesitez pas a tester ce dechiffrement, on va avoir tout les points"
+message_test="n'hesitez pas a tester ce dechiffrement, on va avoir tout les points"
 msg_chiffrer_test=enigma_chiffrer(message_test, (9,9,17))
 print(msg_chiffrer_test)
-a,b=brute_force_enigma(msg_chiffrer_test)
+a,b, c =brute_force_enigma(msg_chiffrer_test)
 print(f'La cle est {a}, et le message est : {b}')
+
+import io, contextlib
 from timeit import timeit
-temps_brute_enigma=timeit('brute_force_enigma (msg_chiffrer_test)', globals=globals(), number=100)
+
+  # Mesure du temps : on silence les 100 appels pour ne pas polluer la console
+  # (et ne pas biaiser la mesure avec le coût des print I/O)
+with contextlib.redirect_stdout(io.StringIO()):
+      temps_brute_enigma = timeit(
+          'brute_force_enigma(msg_chiffrer_test)',
+          globals=globals(),
+          number=100
+      )
 print(f"{temps_brute_enigma/100:.3f} secondes")
-Le dechiffrement du brute force enigma de 0,985 secondes '''
+"""temps_brute_enigma=timeit('brute_force_enigma (msg_chiffrer_test)', globals=globals(), number=100)
+"""
+
+#text court
+"""Le dechiffrement du brute force enigma de 0,985 secondes / AVEC LES PRINT """
+"""Le dechiffrement du brute force enigma de 0,227 secondes MAC/ AVEC LES PRINT """
+"""Le dechiffrement du brute force enigma de 0.221 secondesMAC/SANS LES PRINT"""
+
+#text long 
+
+"""Le dechiffrement du brute force enigma de xxx secondes / AVEC LES PRINT """
+"""Le dechiffrement du brute force enigma de xxx secondes MAC/ AVEC LES PRINT """
+"""Le dechiffrement du brute force enigma de xxx secondes MAC/SANS LE SPRINT"""
