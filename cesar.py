@@ -1,4 +1,5 @@
-def chiffrer (message_brut = "veni, vidi, vici!", cle = 42) :
+def chiffrer (message_brut, cle) :
+
     import string
     alphabet = string.ascii_lowercase
     # 'abcdefghijklmnopqrstuvwxyz'

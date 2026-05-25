@@ -44,11 +44,12 @@ def brute_force_dico_enigma(message_chiffre):
     if meilleur_nombre==0 :
         print("dechiffrage via frequence car dictionnaire pas assez efficace")
         meilleure_cle,message_dechiffrer=brute_force_enigma_frequence(message)
-        return meilleure_cle, message_dechiffrer, None
     else :
         message_dechiffrer=enigma_dechiffrer(message_chiffre, meilleure_cle)
         connus, mots_non_identifies = analyser_mots( message_dechiffrer, dictionnaire)
-        return meilleure_cle, message_dechiffrer, mots_non_identifies      
+        print(f"mots pas identifie : {mots_non_identifies} ")
+
+    return meilleure_cle, message_dechiffrer         
      
 ### cette fonction appelle soit la fonction dechiffrant avec le dictionnaire soit celle dechiffrant avec la frequence des lettres, selon le nombre de mots
 def brute_force_enigma(message_chiffre):
@@ -56,23 +57,17 @@ def brute_force_enigma(message_chiffre):
     message_chiffre=normaliser(message_chiffre)
     if len(message_chiffre.split()) > SEUIL_MOTS:
         print("dechiffrage via frequence")
-        cle,message, mots_non_identifies=brute_force_enigma_frequence(message_chiffre)
+        cle,message=brute_force_enigma_frequence(message_chiffre)
     else:
         print("dechiffrage via dictionnaire")
-        cle,message, mots_non_identifies=brute_force_dico_enigma(message_chiffre)
+        cle,message=brute_force_dico_enigma(message_chiffre)
 
-    return cle,message,mots_non_identifies
+    return cle,message
 
 
 ### TEST###
-message_test="n'hesitez pas a tester ce dechiffrement, on va avoir tout les points"
+'''message_test="n'hesitez pas a tester ce dechiffrement, on va avoir tout les points"
 msg_chiffrer_test=enigma_chiffrer(message_test, (9,9,17))
 print(msg_chiffrer_test)
-# a,b,c=brute_force_enigma(msg_chiffrer_test)
-# print(f'La cle est {a}, et le message est : {b}')
-# print(f"mots pas identifie : {c} ")
-
-# from timeit import timeit
-# temps_brute_enigma=timeit('brute_force_enigma (msg_chiffrer_test)', globals=globals(), number=100)
-# print(f"{temps_brute_enigma/100:.3f} secondes")
-## Le dechiffrement du brute force enigma de 0,985 secondes 
+a,b=brute_force_enigma(msg_chiffrer_test)
+print(f'La cle est {a}, et le message est : {b}')'''
