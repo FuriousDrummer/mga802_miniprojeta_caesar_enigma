@@ -109,4 +109,10 @@ def orchestrer():
         if mots_non_identifies:
             print(f"{len(mots_non_identifies)} mot(s) non identifié(s) : {mots_non_identifies}")
     else:
-        print("Le brute-force Enigma n'est pas encore disponible.")
+        from brute_enigma import brute_force_enigma
+        cle, resultat, mots_non_identifies = brute_force_enigma(texte)
+        print("\n--- Résultat ---")
+        print(f"Clé trouvée   : {cle}")
+        print(f"Déchiffrement : {resultat}")
+        if mots_non_identifies:
+            print(f"{len(mots_non_identifies)} mot(s) non identifié(s) : {mots_non_identifies}")

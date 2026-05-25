@@ -41,28 +41,27 @@ def brute_force_dico_enigma(message_chiffre):
                     meilleur_nombre = len(connus)
                     meilleure_cle = cle
 
-    if meilleur_nombre==0 :
+    if meilleur_nombre == 0:
         print("dechiffrage via frequence car dictionnaire pas assez efficace")
-        meilleure_cle,message_dechiffrer=brute_force_enigma_frequence(message)
-    else :
-        message_dechiffrer=enigma_dechiffrer(message_chiffre, meilleure_cle)
-        connus, mots_non_identifies = analyser_mots( message_dechiffrer, dictionnaire)
-        print(f"mots pas identifie : {mots_non_identifies} ")
+        meilleure_cle, message_dechiffrer = brute_force_enigma_frequence(message_chiffre)
+        return meilleure_cle, message_dechiffrer, None
 
-    return meilleure_cle, message_dechiffrer         
-     
+    message_dechiffrer = enigma_dechiffrer(message_chiffre, meilleure_cle)
+    connus, mots_non_identifies = analyser_mots(message_dechiffrer, dictionnaire)
+    return meilleure_cle, message_dechiffrer, mots_non_identifies
+
+
 ### cette fonction appelle soit la fonction dechiffrant avec le dictionnaire soit celle dechiffrant avec la frequence des lettres, selon le nombre de mots
 def brute_force_enigma(message_chiffre):
 
-    message_chiffre=normaliser(message_chiffre)
+    message_chiffre = normaliser(message_chiffre)
     if len(message_chiffre.split()) > SEUIL_MOTS:
         print("dechiffrage via frequence")
-        cle,message=brute_force_enigma_frequence(message_chiffre)
-    else:
-        print("dechiffrage via dictionnaire")
-        cle,message=brute_force_dico_enigma(message_chiffre)
+        cle, message = brute_force_enigma_frequence(message_chiffre)
+        return cle, message, None
 
-    return cle,message
+    print("dechiffrage via dictionnaire")
+    return brute_force_dico_enigma(message_chiffre)
 
 
 ### TEST###
