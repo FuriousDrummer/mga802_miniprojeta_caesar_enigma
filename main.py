@@ -52,7 +52,7 @@ def main():
 		print("\n--- Résultat Brute-Force ---")
 		print(f"Clé trouvée   : {cle}")
 		print(f"Déchiffrement : {message}")
-		if any(mots_non_identifies):
+		if mots_non_identifies:
 			print(f"Mots non-identifiés : {mots_non_identifies}")
 	elif args.action == "chiffrer":
 		if args.mode == "cesar":
@@ -97,7 +97,7 @@ def main():
 				print(f"Les clés contiennent une valeur non entière. Réessayez.")
 				return
 			message = enigma_dechiffrer(message, cle)
-		print(f"Le message chiffré est : {message}")
+		print(f"Le message déchiffré est : {message}")
 
 
 
