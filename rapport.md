@@ -71,7 +71,7 @@ timeit('brute_force_cesar(msg)', globals=globals(), number=100)
 
 **Comparaison entre deux machines** — pour vérifier que l'algorithme se comporte de façon cohérente d'une machine à l'autre, le même benchmark (mêmes messages, mêmes appels, `number=100`) a été exécuté sur la machine d'un second membre de l'équipe :
 
-| Test (mode dictionnaire, message court) | M5 Pro | `[Machine Victor — à préciser]` | Ratio |
+| Test (mode dictionnaire, message court) | M5 Pro | Intel Core i5-10210U 1.6 GHz 16 Go de RAM | Ratio |
 |---|---:|---:|---:|
 | `brute_force_cesar` | 2,64 ms | 16 ms | × 6,1 |
 | `brute_force_enigma` | 227 ms | 985 ms | × 4,3 |
