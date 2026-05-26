@@ -15,7 +15,9 @@ Le code, en plus de pouvoir effectuer les 3 action citées précédemment, prend
 
 - **Chiffrage :** Chiffrage du message avec la méthode et la clé fournie
 - **Déchiffrage :** Déchiffrage du message avec la méthode et la clé fournie
-- **Bruteforce :** Déchiffrage du message grâce à une base de mots et de la fréquence d'apparition des lettres dans la langue française.
+- **Bruteforce :** Déchiffrage du message grâce à 2 méthodes : 
+  - Teste toutes les clés possibles et confronte les résultats à un dictionnaire intégré `mots_francais.txt` pour identifier les vrais mots
+  - Approche statistique en analysant la fréquence d'apparition des lettres, s'appuyant sur les probabilités naturelles de la langue française pour retrouver le message clair d'origine
 
 ## Utilisation
 
