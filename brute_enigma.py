@@ -58,22 +58,25 @@ def brute_force_enigma(message_chiffre):
     if len(message_chiffre.split()) > SEUIL_MOTS:
         #print("dechiffrage via frequence")
         cle,message=brute_force_enigma_frequence(message_chiffre)
+        return cle,message, None
     else:
         print("dechiffrage via dictionnaire")
-        cle,message=brute_force_dico_enigma(message_chiffre)
+        cle,message,mots_non_identifies=brute_force_dico_enigma(message_chiffre)
+        return cle,message, mots_non_identifies
 
-    return cle,message
+    
 
 
 ### TEST###
 if __name__ == "__main__":
     message_test="les ombres s'allongent doucement sur le vieux canape et le silence s'installe comme un chat qui s'endort"
+    #message_test="un bon cafe"
     msg_chiffrer_test=enigma_chiffrer(message_test, (9,9,17))
     print(msg_chiffrer_test)
-    a,b=brute_force_enigma(msg_chiffrer_test)
+    a,b,c=brute_force_enigma(msg_chiffrer_test)
     print(f'La cle est {a}, et le message est : {b}')
     from timeit import timeit
-    temps_brute_enigma=timeit('brute_force_enigma (msg_chiffrer_test)', globals=globals(), number=50)
-    print(f"{temps_brute_enigma/50:.3f} secondes")
+    # temps_brute_enigma=timeit('brute_force_enigma (msg_chiffrer_test)', globals=globals(), number=50)
+    # print(f"{temps_brute_enigma/50:.3f} secondes")
     #Le dechiffrement du brute force enigma de 0,985 secondes avec le dictionnaire
     # Le dechiffrement du brute force enigma de  2,069 secondes avec les frequences
