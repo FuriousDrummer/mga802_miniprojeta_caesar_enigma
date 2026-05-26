@@ -67,7 +67,8 @@ def test_enigma_trois_cles():
     assert enigma_chiffrer("maison", (7, 16, 9, 18,226)) == "Clefs invalides, il faut trois clefs"
 
 def test_cesar_cle_invalide():
-    assert chiffrer("erreur.", 'bonjour') == "Il ne faut qu'une clef et elle doit etre un nombre"
+    #On teste que la fonction retourne un message d'erreur si on mets une clef qui n'est ps un entier
+    assert chiffrer("erreur.", 'bonjour') == "Erreur ! Il ne faut qu'une clef et elle doit etre un nombre"
 
 def test_maj_et_accents():
     '''On mets un message avec des majuscules et ccaracteres speciaux et un message normaliser
