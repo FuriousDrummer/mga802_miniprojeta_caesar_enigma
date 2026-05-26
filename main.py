@@ -111,9 +111,5 @@ def main():
 		print(f"Le message déchiffré est : {resultat}")
 
 
-
 if __name__ == "__main__":
 	main()
-
-
-
