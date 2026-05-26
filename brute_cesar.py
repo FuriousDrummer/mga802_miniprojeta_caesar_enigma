@@ -163,7 +163,7 @@ if __name__ == "__main__":
     # Démonstration : on chiffre une phrase, puis on retrouve la clé sans la donner.
     from cesar import chiffrer
 
-    exemple = "bonjour, qu'est ce que, tu brute force attends un mot identifie quoi aesrdtfyguhj "
+    exemple = "les ombres s'allongent doucement sur le vieux canape et le silence s'installe comme un chat qui s'endort "
     chiffre = chiffrer(exemple, 5)
     cle_trouvee, dechiffre, mots_non_identifies = brute_force_cesar(chiffre)
 
@@ -173,7 +173,8 @@ if __name__ == "__main__":
     if mots_non_identifies:
         print(f"{len(mots_non_identifies)} mot(s) non identifié(s) : {mots_non_identifies}")
 
-    # from timeit import timeit
-    # temps_brute_cesar=timeit('brute_force_cesar (chiffre)', globals=globals(), number=100)
-    # print(f"{temps_brute_cesar/100:.3f} secondes")
-    #0,0,16 secondes pour le brute_force du chiffrement cesar
+    from timeit import timeit
+    temps_brute_cesar=timeit('brute_force_cesar (chiffre)', globals=globals(), number=100)
+    print(f"{temps_brute_cesar/100:.3f} secondes")
+    #0,0,16 secondes pour le brute_force du chiffrement cesar avec dictionnaire
+    #0,002 secondes avec frequence
