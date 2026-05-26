@@ -63,9 +63,11 @@ def test_brute_force_enigma_phrase():
     assert brute_force_enigma(enigma_chiffrer("le loup mange les renardeaux", (7, 16, 19))) == ((7, 16, 19), "le loup mange les renardeaux", ['renardeaux'])
 
 def test_enigma_trois_cles():
+    #On teste que la fonction retourne un message d'erreur si on mets plus de 3 clefs
     assert enigma_chiffrer("maison", (7, 16, 9, 18,226)) == "Clefs invalides, il faut trois clefs"
 
 def test_cesar_cle_invalide():
+    #On teste que la fonction retourne un message d'erreur si on mets une cle qui n'est pas un entier
     assert chiffrer("erreur.", 'bonjour') == "Il ne faut qu'une clef et elle doit etre un nombre"
 
 def test_maj_et_accents():
