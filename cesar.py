@@ -1,8 +1,10 @@
-def chiffrer (message_brut, cle) :
+import string
 
-    import string
-    alphabet = string.ascii_lowercase
-    # 'abcdefghijklmnopqrstuvwxyz'
+alphabet = string.ascii_lowercase
+# 'abcdefghijklmnopqrstuvwxyz'
+
+
+def chiffrer (message_brut, cle) :
     if type(cle)==int :
         message_traite = ''
         for letter in message_brut :
@@ -15,12 +17,9 @@ def chiffrer (message_brut, cle) :
 
         return message_traite
     else :
-        return "Il ne faut qu'une clef et elle doit etre un nombre"
+        return "Erreur ! Il ne faut qu'une clef et elle doit etre un nombre"
 
 def dechiffrer (message_brut = "veni, vidi, vici!", cle = 42) :
-    import string
-    alphabet = string.ascii_lowercase
-    # 'abcdefghijklmnopqrstuvwxyz'
     if type(cle)==int :
         message_traite = ''
         for letter in message_brut :
@@ -33,4 +32,4 @@ def dechiffrer (message_brut = "veni, vidi, vici!", cle = 42) :
 
         return message_traite
     else :
-        return "Il ne faut qu'une clef et elle doit etre un nombre"
+        return "Erreur ! Il ne faut qu'une clef et elle doit etre un nombre"

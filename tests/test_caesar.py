@@ -66,7 +66,7 @@ def test_enigma_trois_cles():
     assert enigma_chiffrer("maison", (7, 16, 9, 18,226)) == "Clefs invalides, il faut trois clefs"
 
 def test_cesar_cle_invalide():
-    assert chiffrer("erreur.", 'bonjour') == "Il ne faut qu'une clef et elle doit etre un nombre"
+    assert chiffrer("erreur.", 'bonjour') == "Erreur ! Il ne faut qu'une clef et elle doit etre un nombre"
 
 def test_maj_et_accents():
     '''On mets un message avec des majuscules et ccaracteres speciaux et un message normaliser
@@ -80,5 +80,12 @@ def test_maj_et_accents():
 def test_grandes_cles_enigma():
     '''On test des clefs de grandes taille positves et negatives'''
     assert enigma_chiffrer("maison", (26007, 1316, -2617)) == "tqrzew"
+
+def test_chaine_vide():
+    '''Cas limite : une chaîne vide doit rester vide après chiffrement (César et Enigma).'''
+    assert chiffrer("", 5) == ""
+    assert dechiffrer("", 5) == ""
+    assert enigma_chiffrer("", (7, 16, 9)) == ""
+    assert enigma_dechiffrer("", (7, 16, 9)) == ""
 
 

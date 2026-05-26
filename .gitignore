@@ -22,3 +22,6 @@ Thumbs.db
 
 # Fichiers générés par le programme (NE PAS les commiter, garder seulement les exemples)
 # message_encrypte.txt
+
+rapport.md/
+.vscode/

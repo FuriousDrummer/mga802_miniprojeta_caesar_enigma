@@ -176,5 +176,7 @@ if __name__ == "__main__":
     from timeit import timeit
     temps_brute_cesar=timeit('brute_force_cesar (chiffre)', globals=globals(), number=100)
     print(f"{temps_brute_cesar/100:.3f} secondes")
+
+    
     #0,0,16 secondes pour le brute_force du chiffrement cesar avec dictionnaire
     #0,002 secondes avec frequence

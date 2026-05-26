@@ -10,7 +10,7 @@ from enigma import enigma_dechiffrer, enigma_chiffrer
 
 ### dechiffrage base sur les frequences d'utilisations des lettres dans la langue francaise
 def brute_force_enigma_frequence(message):
-    meilleure_cle = 0
+    meilleure_cle = (0, 0, 0)
     meilleure_note = float("inf")
     for cle1 in range(1, 27):
         for cle2 in range(1, 27):
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     a,b,c=brute_force_enigma(msg_chiffrer_test)
     print(f'La cle est {a}, et le message est : {b}')
     from timeit import timeit
-    # temps_brute_enigma=timeit('brute_force_enigma (msg_chiffrer_test)', globals=globals(), number=50)
-    # print(f"{temps_brute_enigma/50:.3f} secondes")
+    temps_brute_enigma=timeit('brute_force_enigma (msg_chiffrer_test)', globals=globals(), number=50)
+    print(f"{temps_brute_enigma/50:.3f} secondes")
     #Le dechiffrement du brute force enigma de 0,985 secondes avec le dictionnaire
     # Le dechiffrement du brute force enigma de  2,069 secondes avec les frequences
