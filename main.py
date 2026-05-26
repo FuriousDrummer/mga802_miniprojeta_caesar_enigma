@@ -34,6 +34,7 @@ def main():
 	parser.add_argument("-c", "--cle", help="La clé (ex: '-c 42' pour cesar, '-c 7-16-9' pour enigma). Requise sauf pour bruteforce.")
 	parser.add_argument("-f", "--fichier", action="store_true", help="Indique que l'argument 'texte' est un chemin de fichier.")
 
+	# interception d'erreurs
 	try:
 		args = parser.parse_args()
 	except SystemExit:
@@ -52,9 +53,13 @@ def main():
 		except FileNotFoundError:
 			print(f"Erreur : fichier '{args.message}' introuvable.")
 			sys.exit(1)
+		except UnicodeDecodeError:
+			print(f"Erreur : le fichier '{args.message}' n'est pas un fichier texte (UTF-8) valide.")
+			sys.exit(1)
 	message = normaliser(message)
 
 	# vérification de l'existence de la clé si l'action n'est pas un bruteforce
+	# traitement de la clé en accord avec les choix
 	if args.action in ["chiffrer", "dechiffrer"] and not args.cle:
 		print("Erreur : La clé (-c) est requise pour chiffrer ou déchiffrer.")
 		return
