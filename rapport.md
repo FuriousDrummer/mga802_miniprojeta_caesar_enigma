@@ -76,6 +76,11 @@ timeit('brute_force_cesar(msg)', globals=globals(), number=100)
 | `brute_force_cesar` | 2,64 ms | 16 ms | × 6,1 |
 | `brute_force_enigma` | 227 ms | 985 ms | × 4,3 |
 
+| Test (mode frequence, message long) | M5 Pro | Intel Core i5-10210U 1.6 GHz 16 Go de RAM | Ratio |
+|---|---:|---:|---:|
+| `brute_force_cesar` |  | 2 ms | ×  |
+| `brute_force_enigma` |  | 2069 ms | × |
+
 Le ratio est cohérent entre les deux tests (~5–6×), ce qui confirme que la différence vient bien du **matériel** (CPU, mémoire) et non d'un comportement asymétrique de l'algorithme.
 
 ## 4. Distribution des tâches
